@@ -1,0 +1,35 @@
+spring:
+  profiles:
+    active: dev
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: "dev"
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    password: password
+    url: jdbc:mysql://localhost:3306/ssdetailing_dev
+    username: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: "prod"
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    password: password
+    url: jdbc:mysql://localhost:3306/ssdetailing_prod
+    username: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
