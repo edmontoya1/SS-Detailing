@@ -15,8 +15,10 @@ public class DetailService {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "detail_service_id")
     private Long id;
+
     @ManyToOne
-    @JoinColumn(name = "appointment_id")
+    @JoinColumn(name = "appointment_id", referencedColumnName = "appointment_id")
     private Appointment appointment;
 }

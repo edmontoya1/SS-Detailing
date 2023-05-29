@@ -19,11 +19,16 @@ public class Appointment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "appointment_id")
     private Long id;
+
     private LocalDateTime date;
+
     @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
     private Customer customer;
+
     @OneToMany(mappedBy = "appointment", cascade = CascadeType.ALL)
+    @Column(name = "detail_services")
     private List<DetailService> detailServiceList;
 }

@@ -19,16 +19,22 @@ import java.util.List;
 public class Customer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "customer_id")
     private Long id;
+
     @NotBlank(message = "Missing First Name")
     private String firstName;
+
     @NotBlank(message = "Missing Last Name")
     private String lastName;
+
     @Email
     private String email;
-    private String address;
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    private List<Appointment> appointmentList;
 
+    private String address;
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @Column(name = "appointments")
+    private List<Appointment> appointmentList;
 }
