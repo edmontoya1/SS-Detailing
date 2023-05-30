@@ -33,6 +33,8 @@ public class Appointment {
 
     private Long customer_Id;
 
+    private boolean isValid;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "appointment_id", referencedColumnName = "appointmentId")
     private List<DetailService> detailServiceList;

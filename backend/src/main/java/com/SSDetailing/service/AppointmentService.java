@@ -12,4 +12,6 @@ public interface AppointmentService {
     Appointment createAppointment(Appointment appointment, Long id) throws CustomerNotFoundException;
 
     Appointment deleteAppointmentById(Long id) throws AppointmentNotFoundException;
+
+    List<Appointment> getAllValidAppointments();
 }
