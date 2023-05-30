@@ -2,6 +2,7 @@ package com.SSDetailing.service;
 
 import com.SSDetailing.entity.Appointment;
 import com.SSDetailing.entity.Customer;
+import com.SSDetailing.error.AppointmentNotFoundException;
 import com.SSDetailing.error.CustomerNotFoundException;
 import com.SSDetailing.repository.AppointmentRepository;
 import com.SSDetailing.repository.CustomerRepository;
@@ -40,5 +41,18 @@ public class AppointmentServiceImpl implements AppointmentService{
         }
 
         return appointmentRepository.save(appointment);
+    }
+
+    @Override
+    public Appointment deleteAppointmentById(Long id) throws AppointmentNotFoundException {
+        Optional<Appointment> toDelete = appointmentRepository.findById(id);
+
+        if (!toDelete.isPresent()) {
+            throw new AppointmentNotFoundException("Appointment Does Not Exist");
+        }
+
+        appointmentRepository.deleteById(id);
+
+        return toDelete.get();
     }
 }

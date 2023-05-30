@@ -1,6 +1,7 @@
 package com.SSDetailing.controller;
 
 import com.SSDetailing.entity.Appointment;
+import com.SSDetailing.error.AppointmentNotFoundException;
 import com.SSDetailing.error.CustomerNotFoundException;
 import com.SSDetailing.service.AppointmentService;
 import jakarta.validation.Valid;
@@ -24,9 +25,14 @@ public class AppointmentController {
         return appointmentService.getAllAppointments();
     }
 
-    @PostMapping("/{customerId}")
+    @PostMapping("/{appointmentId}")
     public Appointment createAppointment(@Valid @RequestBody Appointment appointment,
-                                         @PathVariable("customerId") Long id) throws CustomerNotFoundException {
+                                         @PathVariable("appointmentId") Long id) throws CustomerNotFoundException {
         return appointmentService.createAppointment(appointment, id);
+    }
+
+    @DeleteMapping("/{appointmentId}")
+    public Appointment deleteAppointmentById(@PathVariable("appointmentId") Long id) throws AppointmentNotFoundException {
+        return appointmentService.deleteAppointmentById(id);
     }
 }
