@@ -14,11 +14,20 @@ import lombok.NoArgsConstructor;
 public class DetailService {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "detail_service_id")
-    private Long id;
+    @SequenceGenerator(
+            name = "detail_service_sequence",
+            sequenceName = "detail_service_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "detail_service_sequence"
+    )
+    private Long detailServiceId;
 
-    @ManyToOne
-    @JoinColumn(name = "appointment_id", referencedColumnName = "appointment_id")
-    private Appointment appointment;
+    private String type;
+
+    private double price;
+
+    private Long appointment_id;
 }

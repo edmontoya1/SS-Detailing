@@ -18,17 +18,22 @@ import java.util.List;
 public class Appointment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "appointment_id")
-    private Long id;
+    @SequenceGenerator(
+            name = "appointment_sequence",
+            sequenceName = "appointment_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "appointment_sequence"
+    )
+    private Long appointmentId;
 
     private LocalDateTime date;
 
-    @ManyToOne
-    @JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
-    private Customer customer;
+    private Long customer_Id;
 
-    @OneToMany(mappedBy = "appointment", cascade = CascadeType.ALL)
-    @Column(name = "detail_services")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "appointment_id", referencedColumnName = "appointmentId")
     private List<DetailService> detailServiceList;
 }

@@ -3,11 +3,9 @@ package com.SSDetailing.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,9 +17,16 @@ import java.util.List;
 public class Customer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "customer_id")
-    private Long id;
+    @SequenceGenerator(
+            name = "customer_sequence",
+            sequenceName = "customer_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "customer_sequence"
+    )
+    private Long customerId;
 
     @NotBlank(message = "Missing First Name")
     private String firstName;
@@ -34,7 +39,7 @@ public class Customer {
 
     private String address;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    @Column(name = "appointments")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "customer_id", referencedColumnName = "customerId")
     private List<Appointment> appointmentList;
 }
