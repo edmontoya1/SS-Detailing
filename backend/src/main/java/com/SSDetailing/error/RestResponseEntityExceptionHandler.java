@@ -19,4 +19,11 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         ErrorMessage message = new ErrorMessage(HttpStatus.NOT_FOUND, customerNotFoundException.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
     }
+
+    @ExceptionHandler(AppointmentNotFoundException.class)
+    public ResponseEntity<ErrorMessage> appointmentNotFoundException(AppointmentNotFoundException appointmentNotFoundException,
+                                                                  WebRequest request) {
+        ErrorMessage message = new ErrorMessage(HttpStatus.NOT_FOUND, appointmentNotFoundException.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
+    }
 }
