@@ -25,9 +25,12 @@ public class AppointmentController {
         return appointmentService.getAllAppointments();
     }
 
-    @PostMapping("/{appointmentId}")
+    @GetMapping("/valid")
+    public List<Appointment> getAllValidAppointments() { return appointmentService.getAllValidAppointments(); }
+
+    @PostMapping("/{customerId}")
     public Appointment createAppointment(@Valid @RequestBody Appointment appointment,
-                                         @PathVariable("appointmentId") Long id) throws CustomerNotFoundException {
+                                         @PathVariable("customerId") Long id) throws CustomerNotFoundException {
         return appointmentService.createAppointment(appointment, id);
     }
 
